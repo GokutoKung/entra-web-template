@@ -128,7 +128,7 @@ Or run the image directly:
 docker run --rm -p 8080:8080 \
   -e AZURE_CLIENT_ID=<client-id> \
   -e AZURE_TENANT_ID=<tenant-id> \
-  YOUR_DOCKERHUB_USER/entra-web-template:latest
+  gokutokung/entra-web-template:latest
 ```
 
 You can also **mount your own YAML** instead of using env (leave `AZURE_*` unset):
@@ -136,7 +136,7 @@ You can also **mount your own YAML** instead of using env (leave `AZURE_*` unset
 ```bash
 docker run --rm -p 8080:8080 \
   -v "$(pwd)/config.yaml:/usr/share/nginx/html/config.yaml:ro" \
-  YOUR_DOCKERHUB_USER/entra-web-template:latest
+  gokutokung/entra-web-template:latest
 ```
 
 ### Runtime variables
@@ -163,8 +163,8 @@ docker run --rm -p 8080:8080 \
 ### Build & publish to Docker Hub (maintainers)
 
 ```bash
-docker build -t YOUR_DOCKERHUB_USER/entra-web-template:latest .
-docker push YOUR_DOCKERHUB_USER/entra-web-template:latest
+docker build -t gokutokung/entra-web-template:latest .
+docker push gokutokung/entra-web-template:latest
 ```
 
 ### CI (GitHub Actions)
