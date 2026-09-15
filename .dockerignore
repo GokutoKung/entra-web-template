@@ -1,0 +1,28 @@
+# dependencies & build output (rebuilt inside the image)
+node_modules
+dist
+dist-ssr
+coverage
+
+# local runtime config — never bake a developer's config into the image
+config/config.yaml
+
+# version control & tooling
+.git
+.gitignore
+.github
+.husky
+.vscode
+.idea
+
+# env & logs & OS cruft
+.env
+.env.*
+*.log
+.DS_Store
+
+# docker & docs (not needed in the build context)
+Dockerfile
+.dockerignore
+docker-compose.yml
+README.md

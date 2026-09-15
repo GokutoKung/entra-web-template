@@ -1,0 +1,36 @@
+# Entra Web Template — configuration.
+#
+# Local dev: copy this file to config.yaml (same folder) and fill it in:
+#     cp config/config.yaml.example config/config.yaml
+#
+# In Docker this file is generated at container startup from AZURE_* env vars
+# (or you can mount your own config.yaml). See the README.
+#
+# All values are public (PKCE public client). Never put a secret here.
+
+# Server (used by the dev server and the Docker container).
+# The env var PORT overrides this (e.g. Azure Container Apps / Cloud Run).
+server:
+  port: 5173
+
+azure:
+  # Application (client) ID of your App registration.  [REQUIRED]
+  clientId: '00000000-0000-0000-0000-000000000000'
+
+  # Directory (tenant) ID, or one of: common | organizations | consumers.  [REQUIRED]
+  tenantId: '00000000-0000-0000-0000-000000000000'
+
+  # Authority host. Default: login.microsoftonline.com
+  # Sovereign clouds: login.microsoftonline.us | login.partner.microsoftonline.cn
+  authorityHost: 'login.microsoftonline.com'
+
+  # Redirect URI. Leave empty to use the current origin (e.g. http://localhost:5173).
+  # Must be registered under the App registration's "Single-page application" platform.
+  redirectUri: ''
+
+  # Where to land after sign-out. Empty = same as redirectUri.
+  postLogoutRedirectUri: ''
+
+  # Scopes to request (a list, or a single space/comma separated string).
+  scopes:
+    - User.Read

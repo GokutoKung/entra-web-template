@@ -1,0 +1,38 @@
+# Entra Web Template — run the published image and configure it here.
+#
+#   1. Replace the image name with your Docker Hub repo.
+#   2. Fill in AZURE_CLIENT_ID and AZURE_TENANT_ID below (or via a .env file
+#      next to this compose file — Compose auto-loads it for ${...}).
+#   3. docker compose up -d   →   open http://localhost:8080
+#
+# All values are public (PKCE public client). Never put a secret here.
+#
+# The AZURE_* vars are rendered into /config.yaml at container startup.
+#
+# PORT here controls both the host port and the container's listen port. In
+# Compose, set it via env / a .env file (Compose can't read the port out of a
+# mounted config.yaml at parse time). It overrides `server.port` in config.yaml.
+# For a config.yaml-driven port instead, use `docker run` with a mounted file
+# (see the README).
+
+services:
+  entra-web-template:
+    image: YOUR_DOCKERHUB_USER/entra-web-template:latest
+    # To build locally from this repo instead of pulling, uncomment:
+    # build: .
+    ports:
+      - '${PORT:-8080}:${PORT:-8080}'
+    environment:
+      # ── Service ──────────────────────────────────────────────
+      PORT: '${PORT:-8080}'
+      # ── Required ─────────────────────────────────────────────
+      AZURE_CLIENT_ID: '00000000-0000-0000-0000-000000000000'
+      AZURE_TENANT_ID: '00000000-0000-0000-0000-000000000000'
+      # ── Optional (defaults shown) ────────────────────────────
+      AZURE_SCOPES: 'User.Read'
+      # AZURE_REDIRECT_URI defaults to the served origin (e.g. http://localhost:8080).
+      # Set it only to force a specific value:
+      # AZURE_REDIRECT_URI: "http://localhost:${PORT:-8080}"
+      # AZURE_POST_LOGOUT_REDIRECT_URI: "http://localhost:${PORT:-8080}"
+      # AZURE_AUTHORITY_HOST: "login.microsoftonline.com"
+    restart: unless-stopped

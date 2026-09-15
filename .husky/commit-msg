@@ -1,0 +1,5 @@
+# GUI git clients (e.g. GitHub Desktop) don't inherit the shell PATH,
+# so add bun and node locations before running the tools.
+export PATH="$HOME/.bun/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+bunx commitlint --edit $1

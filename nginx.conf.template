@@ -1,0 +1,31 @@
+# Rendered at container startup by docker/40-configure.sh (envsubst ${PORT}).
+# Only ${PORT} is substituted, so nginx's own $uri / $host are left untouched.
+server {
+    listen       ${PORT};
+    server_name  _;
+
+    root   /usr/share/nginx/html;
+    index  index.html;
+
+    # SPA history fallback — unknown paths return index.html.
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Runtime config is regenerated per container start — never cache it.
+    location = /config.yaml {
+        add_header Cache-Control "no-store";
+    }
+
+    # Hashed build assets are immutable; cache them aggressively.
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # Never cache the HTML entry point, so new deploys are picked up.
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+}
