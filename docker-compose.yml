@@ -17,7 +17,7 @@
 
 services:
   entra-web-template:
-    image: YOUR_DOCKERHUB_USER/entra-web-template:latest
+    image: entra-web-template:latest
     # To build locally from this repo instead of pulling, uncomment:
     # build: .
     ports:
